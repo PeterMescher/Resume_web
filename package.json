@@ -1,0 +1,20 @@
+{
+  "name": "resume_web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "resume_counter_api_test.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.15.30"
+  },
+  "dependencies": {
+    "cypress": "^14.4.1"
+  }
+}

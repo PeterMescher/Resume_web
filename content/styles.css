@@ -1,0 +1,20 @@
+body {
+  background-color: bisque;
+}
+h1 {
+  color: darkblue;
+  font-family: Arial, sans-serif;
+}
+p {
+  color: darkgreen;
+  font-size: 16px;
+  line-height: 1.5;
+}
+a {
+  color: darkred;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
