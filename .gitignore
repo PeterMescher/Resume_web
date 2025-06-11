@@ -5,3 +5,5 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+Resume_web.code-workspace
+Terraform_planning_doc.txt
