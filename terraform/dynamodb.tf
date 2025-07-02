@@ -29,8 +29,3 @@ data "aws_iam_policy_document" "crc_lambda_dynamodb_resource_policy" {
   }
 
 }
-
-resource "aws_dynamodb_resource_policy" "crc_resume_counter_policy" {
-  resource_arn = aws_dynamodb_table.crc_resume_counter_table.arn
-  policy       = data.aws_iam_policy_document.crc_lambda_dynamodb_resource_policy.json
-}
