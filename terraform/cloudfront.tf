@@ -43,7 +43,7 @@ resource "aws_cloudfront_distribution" "crc_resume_cloudfront" {
 
   viewer_certificate {
     cloudfront_default_certificate = false
-    acm_certificate_arn            = crc_resume_certificate.arn
+    acm_certificate_arn            = aws_acm_certificate.crc_resume_certificate.arn
     ssl_support_method             = "sni-only"
   }
 }
