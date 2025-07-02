@@ -54,11 +54,6 @@ resource "aws_iam_policy" "crc_lambda_dynamodb_policy" {
   policy = data.aws_iam_policy_document.crc_lambda_dynamodb_policy.json
 }
 
-resource "aws_iam_policy" "crc_lamabda_assume_role_policy" {
-  name   = "LambdaAssumeRolePolicy"
-  policy = data.aws_iam_policy_document.lambda_assume_role_policy.json
-}
-
 resource "aws_iam_role_policy_attachment" "crc_lambda_cloudwatch_policy_attachment" {
   role       = aws_iam_role.crc_lambda_execution_role.name
   policy_arn = aws_iam_policy.crc_lambda_cloudwatch_policy.arn
