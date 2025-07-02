@@ -11,7 +11,7 @@ resource "aws_cloudfront_distribution" "crc_resume_cloudfront" {
   default_root_object = "index.html"
 
   default_cache_behavior {
-    target_origin_id = "S3Origin"
+    target_origin_id = "crc_Resume_S3_Origin"
     viewer_protocol_policy = "redirect-to-https"
 
     allowed_methods = [

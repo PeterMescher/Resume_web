@@ -69,7 +69,3 @@ resource "aws_iam_role_policy_attachment" "crc_lambda_dynamodb_policy_attachment
   policy_arn = aws_iam_policy.crc_lambda_dynamodb_policy.arn
 }
 
-resource "aws_iam_role_policy_attachment" "crc_lambda_assume_role_policy_attachment" {
-  role       = aws_iam_role.crc_lambda_execution_role.name
-  policy_arn = aws_iam_policy.crc_lamabda_assume_role_policy.arn
-}
