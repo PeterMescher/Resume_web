@@ -91,7 +91,7 @@ resource "aws_route53_record" "crc_website_counter_api_A_record" {
   type    = "A"
 
   alias {
-    name                   = aws_apigatewayv2_api.crc_website_counter_api.api_endpoint
+    name                   = data.external.website_counter_apigwv2_domain_info.result["target_domain_name"]
     zone_id                = data.external.website_counter_apigwv2_domain_info.result["hosted_zone_id"]
     evaluate_target_health = true
   }
@@ -104,7 +104,7 @@ resource "aws_route53_record" "crc_website_counter_api_AAAA_record" {
   type    = "AAAA"
 
   alias {
-    name                   = aws_apigatewayv2_api.crc_website_counter_api.api_endpoint
+    name                   = data.external.website_counter_apigwv2_domain_info.result["target_domain_name"]
     zone_id                = data.external.website_counter_apigwv2_domain_info.result["hosted_zone_id"]
     evaluate_target_health = true
   }

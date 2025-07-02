@@ -6,6 +6,7 @@
 # note: I'm not a bash expert, and I know this looks ugly, but the "clean" version suggested by chatGPT relies on
 # jq, which is not part of a standard Linux install; this one is just bash (also written by chatGPT)
 
+#!/bin/bash
 set -e
 
 input=$(cat)
@@ -15,13 +16,11 @@ domain_name=$(echo "$input" | sed -n 's/.*"domain_name"[[:space:]]*:[[:space:]]*
 region=$(echo "$input" | sed -n 's/.*"region"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
 aws_profile=$(echo "$input" | sed -n 's/.*"aws_profile"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
 
-# Validate inputs
 if [[ -z "$domain_name" || -z "$region" || -z "$aws_profile" ]]; then
-  echo "Error: Missing domain_name, region, or aws_profile" >&2
+  echo "Error: domain_name, region, and aws_profile must be provided" >&2
   exit 1
 fi
 
-# Retry loop parameters
 max_attempts=10
 attempt=1
 sleep_seconds=5
@@ -29,20 +28,24 @@ sleep_seconds=5
 while [ $attempt -le $max_attempts ]; do
   response=$(aws apigatewayv2 get-domain-names --region "$region" --profile "$aws_profile" 2>/dev/null)
 
-  # Extract the block for our domain
-  block=$(echo "$response" | awk "/\"DomainName\": \"$domain_name\"/,/}/")
+  # Narrow to the matching domain
+  domain_block=$(echo "$response" | awk -v name="$domain_name" '
+    $0 ~ "\"DomainName\"[[:space:]]*:[[:space:]]*\""name"\"" {found=1}
+    found { print }
+    /\},/ && found { exit }
+  ')
 
-  # Extract values
-  hosted_zone_id=$(echo "$block" | grep '"HostedZoneId"' | sed -n 's/.*"HostedZoneId"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
-  target_domain_name=$(echo "$block" | grep '"ApiGatewayDomainName"' | sed -n 's/.*"ApiGatewayDomainName"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
+  # Then extract HostedZoneId and ApiGatewayDomainName from DomainNameConfigurations
+  hosted_zone_id=$(echo "$domain_block" | grep '"HostedZoneId"' | head -n1 | sed -n 's/.*"HostedZoneId"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
+  target_domain_name=$(echo "$domain_block" | grep '"ApiGatewayDomainName"' | head -n1 | sed -n 's/.*"ApiGatewayDomainName"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
 
   if [[ -n "$hosted_zone_id" && -n "$target_domain_name" ]]; then
     # Success
-    printf "{\"hosted_zone_id\": \"$hosted_zone_id\", \"target_domain_name\": \"$target_domain_name\"}"
+    printf '{ "hosted_zone_id": "%s", "target_domain_name": "%s" }\n' "$hosted_zone_id" "$target_domain_name"
     exit 0
   fi
 
-  echo "Waiting for API Gateway domain \"$domain_name\" to become available (attempt $attempt/$max_attempts)..." >&2
+  echo "Waiting for domain \"$domain_name\" to be available (attempt $attempt/$max_attempts)..." >&2
   attempt=$((attempt + 1))
   sleep "$sleep_seconds"
 done
