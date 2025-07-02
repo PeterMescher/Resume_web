@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "crc_lambda_dynamodb_resource_policy" {
   statement {
     principals {
       type        = "AWS"
-      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${aws_iam_role.crc_lambda_execution_role.name}"]
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/service-role/${aws_iam_role.crc_lambda_execution_role.name}"]
     }
     effect    = "Allow"
     sid       = "AllowLambdaDynamoDBAccess"

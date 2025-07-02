@@ -2,7 +2,7 @@
 # It does not contain the R53 records we actually use to serve the site, those are in route53.tf
 
 resource "aws_acm_certificate" "crc_resume_certificate" {
-  domain_name       = "$*.{var.site_domain_prefix}.${var.site_base_domain}"
+  domain_name       = "*.${var.site_domain_prefix}.${var.site_base_domain}"
   validation_method = "DNS"
 
   lifecycle {

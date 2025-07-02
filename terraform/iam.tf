@@ -29,6 +29,7 @@ data "aws_iam_policy_document" "crc_lambda_dynamodb_policy" {
 
 data "aws_iam_policy_document" "lambda_assume_role_policy" {
   statement {
+    effect = "Allow"
     actions = ["sts:AssumeRole"]
     principals {
       type        = "Service"
