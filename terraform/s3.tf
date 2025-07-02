@@ -49,3 +49,19 @@ resource "null_resource" "upload_static_site" {
     aws_s3_bucket_policy.crc_resume_s3_policy,
   ]
 }
+
+resource "null_resource" "cloudfront_invalidation" {
+  triggers = {
+    content_hash = local.site_hash
+  }
+
+  provisioner "local-exec" {
+    command = <<EOT
+      aws cloudfront create-invalidation \
+        --distribution-id ${aws_cloudfront_distribution.crc_resume_cloudfront.id} \
+        --paths "/*" --profile ${var.aws_profile}
+    EOT
+  }
+
+  depends_on = [null_resource.upload_static_site]
+}
