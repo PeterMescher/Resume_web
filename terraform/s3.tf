@@ -29,12 +29,21 @@ data "aws_iam_policy_document" "crc_resume_allow_access_from_cloudfront" {
   }
 }
 
-resource "null_resource" "crc_resume_content_upload" {
+locals {
+  site_dir      = "${var.local_resume_content_path}"
+  site_files    = fileset(local.site_dir, "**")
+  site_hash     = sha256(join("", [
+    for f in local.site_files :
+    filesha256("${local.site_dir}/${f}")
+  ]))
+}
+
+resource "null_resource" "upload_static_site" {
+  triggers = {
+    content_hash = local.site_hash
+  }
   provisioner "local-exec" {
     command = "aws s3 sync ${var.local_resume_content_path} s3://${aws_s3_bucket.crc_resume_content_bucket.bucket} --profile ${var.aws_profile} --region ${var.aws_region} --delete"
-  }
-  triggers = {
-    content_hash = filesha256("${var.local_resume_content_path}")
   }
   depends_on = [
     aws_s3_bucket_policy.crc_resume_s3_policy,

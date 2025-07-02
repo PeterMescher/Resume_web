@@ -14,3 +14,5 @@ provider "aws" {
 
 provider "random" {
 }
+
+provider "null" {}
