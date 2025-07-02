@@ -78,6 +78,7 @@ data "external" "website_counter_apigwv2_domain_info" {
   query = {
     domain_name = aws_apigatewayv2_domain_name.crc_website_counter_domain.domain_name
     region      = var.aws_region
+    aws_profile = var.aws_profile
   }
 
   depends_on = [ aws_apigatewayv2_domain_name.crc_website_counter_domain ]
