@@ -1,11 +1,8 @@
 resource "aws_cloudfront_distribution" "crc_resume_cloudfront" {
   origin {
     domain_name = aws_s3_bucket.crc_resume_content_bucket.bucket_regional_domain_name
-    origin_id   = "S3Origin"
-    
-    s3_origin_config {
-      origin_access_identity = aws_cloudfront_origin_access_identity.crc_resume_oai.cloudfront_access_identity_path
-    }
+    origin_id   = "crc_Resume_S3_Origin"
+    origin_access_control_id = aws_cloudfront_origin_access_control.crc_resume_oac.id
   }
 
   enabled             = true
@@ -49,4 +46,11 @@ resource "aws_cloudfront_distribution" "crc_resume_cloudfront" {
     acm_certificate_arn            = crc_resume_certificate.arn
     ssl_support_method             = "sni-only"
   }
+}
+
+resource "aws_cloudfront_origin_access_control" "crc_resume_oac" {
+  origin_access_control_origin_type = "s3"
+  signing_behavior            = "always"
+  signing_protocol            = "sigv4"
+  name                        = "crc-resume-oac"
 }
