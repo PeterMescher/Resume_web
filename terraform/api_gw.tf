@@ -12,7 +12,7 @@ resource "aws_apigatewayv2_api" "crc_website_counter_api" {
 resource "aws_apigatewayv2_integration" "crc_website_counter_integration" {
   api_id             = aws_apigatewayv2_api.crc_website_counter_api.id
   integration_type   = "AWS_PROXY"
-  integration_uri    = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/${aws_lambda_function.crc_website_counter_function.arn}/invocations"
+  integration_uri    = "arn:aws:apigateway:${var.aws_region}:lambda:path/2015-03-31/functions/${aws_lambda_function.crc_website_counter.arn}/invocations"
 }
 
 resource "aws_apigatewayv2_route" "crc_website_counter_route" {

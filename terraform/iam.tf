@@ -1,4 +1,4 @@
-resource "aws_iam_policy_document" "crc_lambda_cloudwatch_policy" {
+data "aws_iam_policy_document" "crc_lambda_cloudwatch_policy" {
   statement {
     actions = [
       "logs:CreateLogGroup",
@@ -12,7 +12,7 @@ resource "aws_iam_policy_document" "crc_lambda_cloudwatch_policy" {
   }
 }
 
-resource "aws_iam_policy_document" "crc_lambda_dynamodb_policy" {
+data "aws_iam_policy_document" "crc_lambda_dynamodb_policy" {
   statement {
     actions = [
       "dynamodb:DeleteItem",
@@ -27,7 +27,7 @@ resource "aws_iam_policy_document" "crc_lambda_dynamodb_policy" {
   }
 }
 
-resource "aws_iam_policy_document" "lambda_assume_role_policy" {
+data "aws_iam_policy_document" "lambda_assume_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
     principals {

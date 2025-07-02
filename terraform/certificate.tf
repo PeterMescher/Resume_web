@@ -29,5 +29,5 @@ resource "aws_route53_record" "crc_resume_validation_records" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = data.aws_route53_zone.crc_resume_zone.zone_id
+  zone_id         = aws_route53_zone.crc_resume_zone.zone_id
 }

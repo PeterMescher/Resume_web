@@ -1,8 +1,3 @@
-variable "backend_bucket" {
-  description = "The name of the S3 bucket for Terraform state"
-  type        = string
-}
-
 variable "aws_region" {
   description = "The AWS region to deploy resources in"
   type        = string
@@ -19,11 +14,6 @@ variable "s3_bucket_name_prefix" {
   description = "Prefix for the S3 bucket names"
   type        = string
   default     = "peter-mescher-crc-resume-content"
-}
-
-variable "backend_bucket_prefix" {
-  description = "The name of the S3 bucket for Terraform state"
-  type        = string
 }
 
 variable "site_base_domain" {

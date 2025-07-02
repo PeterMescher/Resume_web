@@ -8,10 +8,11 @@ resource "aws_dynamodb_table" "crc_resume_counter_table" {
   }
 }
 
-resource "aws_iam_policy_document" "crc_lambda_dynamodb_resource_policy" {
+data "aws_iam_policy_document" "crc_lambda_dynamodb_resource_policy" {
   statement {
-    principals = {
-      "AWS" = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${aws_iam_role.crc_lambda_execution_role.name}"
+    principals {
+      type        = "AWS"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${aws_iam_role.crc_lambda_execution_role.name}"]
     }
     effect    = "Allow"
     sid       = "AllowLambdaDynamoDBAccess"
