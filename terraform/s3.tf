@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "crc_resume_content_bucket" {
-  bucket = "${var.s3_bucket_name_prefix}-${random_id.crc_resume_unique_id.id}"
+  bucket = "${var.s3_bucket_name_prefix}-${random_id.crc_resume_unique_id.hex}"
 }
 
 resource "aws_s3_bucket_policy" "crc_resume_s3_policy" {
