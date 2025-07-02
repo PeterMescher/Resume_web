@@ -3,6 +3,7 @@
 
 resource "aws_acm_certificate" "crc_resume_certificate" {
   domain_name       = "*.${var.site_domain_prefix}.${var.site_base_domain}"
+  subject_alternative_names = ["${var.site_domain_prefix}.${var.site_base_domain}"]
   validation_method = "DNS"
 
   lifecycle {
