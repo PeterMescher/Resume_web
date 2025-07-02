@@ -28,6 +28,14 @@ resource "aws_cloudfront_distribution" "crc_resume_cloudfront" {
     min_ttl     = 0
     default_ttl = 3600
     max_ttl     = 86400
+    
+    forwarded_values {
+      query_string = false
+
+      cookies {
+        forward = "none"
+      }
+    }
   }
 
   restrictions {
