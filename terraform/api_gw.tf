@@ -2,7 +2,7 @@ resource "aws_apigatewayv2_api" "crc_website_counter_api" {
   name          = "crc_website_counter_api"
   protocol_type = "HTTP"
   cors_configuration {
-    allow_origins = ["${var.site_domain_prefix}.${var.site_base_domain}"]
+    allow_origins = ["https://${var.site_domain_prefix}.${var.site_base_domain}"]
     allow_methods = ["GET"]
     max_age = 0
   }
