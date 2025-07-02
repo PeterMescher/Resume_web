@@ -2,6 +2,9 @@ provider "aws" {
   region = var.aws_region
 }
 
+data "aws_caller_identity" "current" {
+}
+
 provider "aws" {
   alias = "root_domain_acct"
   region = var.aws_region
