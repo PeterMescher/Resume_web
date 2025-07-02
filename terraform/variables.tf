@@ -21,6 +21,11 @@ variable "s3_bucket_name_prefix" {
   default     = "peter-mescher-crc-resume-content"
 }
 
+variable "local_resume_content_path" {
+  description = "The local path to the resume content to upload to S3"
+  type        = string
+}
+
 variable "site_base_domain" {
   description = "The base domain for the site"
   type        = string
