@@ -4,6 +4,11 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "aws_profile" {
+  description = "The AWS CLI profile to use for deploying resources"
+  type        = string
+}
+
 variable "random_id_byte_length" {
   description = "The byte length for the random ID used in resource names"
   type        = number
