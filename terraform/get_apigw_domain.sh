@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# This script retrieves the API Gateway zone ID and target domain name for a given API Gateway domain.
+# It is intended to be used in a Terraform `external` data source.
+
 # note: I'm not a bash expert, and I know this looks ugly, but the "clean" version suggested by chatGPT relies on
 # jq, which is not part of a standard Linux install; this one is just bash (also written by chatGPT)
 
@@ -35,7 +38,7 @@ while [ $attempt -le $max_attempts ]; do
 
   if [[ -n "$hosted_zone_id" && -n "$target_domain_name" ]]; then
     # Success
-    echo "{\"hosted_zone_id\": \"$hosted_zone_id\", \"target_domain_name\": \"$target_domain_name\"}"
+    printf "{\"hosted_zone_id\": \"$hosted_zone_id\", \"target_domain_name\": \"$target_domain_name\"}"
     exit 0
   fi
 
