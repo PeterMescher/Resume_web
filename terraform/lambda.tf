@@ -24,13 +24,3 @@ resource "aws_lambda_function" "crc_website_counter" {
     aws_iam_role_policy_attachment.crc_lambda_dynamodb_policy_attachment,
   ]
 }
-
-resource "aws_lambda_permission" "allow_api_gateway" {
-  statement_id  = "AllowExecutionFromAPIGateway"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.crc_website_counter.function_name
-  principal     = "apigateway.amazonaws.com"
-
-  # The source ARN is the API Gateway's ARN
-  source_arn = "${aws_apigatewayv2_api.crc_website_counter_api.execution_arn}/*/*"
-}
