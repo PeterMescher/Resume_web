@@ -38,6 +38,9 @@ resource "aws_apigatewayv2_domain_name" "crc_website_counter_domain" {
     endpoint_type   = "REGIONAL"
     security_policy = "TLS_1_2"
   }
+  depends_on = [
+    aws_acm_certificate_validation.crc_resume_certificate_validation,
+  ]
 }
 
 resource "aws_apigatewayv2_api_mapping" "crc_website_counter_api_mapping" {

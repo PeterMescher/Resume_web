@@ -46,6 +46,8 @@ resource "aws_cloudfront_distribution" "crc_resume_cloudfront" {
     acm_certificate_arn            = aws_acm_certificate.crc_resume_certificate.arn
     ssl_support_method             = "sni-only"
   }
+
+  depends_on = [ aws_acm_certificate_validation.crc_resume_certificate_validation ]
 }
 
 resource "aws_cloudfront_origin_access_control" "crc_resume_oac" {
