@@ -5,5 +5,14 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+#vscode
 Resume_web.code-workspace
+
+#terraform
 Terraform_planning_doc.txt
+dev.tfvars
+terraform.tfstate
+terraform.tfstate.backup
+.terraform/
+.terraform.lock.hcl

@@ -1,6 +1,11 @@
 document.addEventListener ('DOMContentLoaded', () => {
   const pagePath = window.location.pathname;
-  const apiBaseURL = 'https://api.crc.mescher.net/website_counter';
+
+  let host = window.location.hostname.replace(/^www\./, '');
+  const apiHost = `api.${host}`;
+
+  const apiBaseURL = 'https://{apiHost}/website_counter';
+  
   const url = `${apiBaseURL}?page_name=${encodeURIComponent(pagePath)}`;
 
   fetch(url)
