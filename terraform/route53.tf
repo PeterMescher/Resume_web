@@ -32,7 +32,7 @@ resource "aws_route53_record" "base_site_hosting_A_record" {
 
 resource "aws_route53_record" "www_site_hosting_A_record" {
   zone_id = aws_route53_zone.crc_resume_zone.zone_id
-  name    = "${var.site_domain_prefix}.${var.site_base_domain}"
+  name    = "www.${var.site_domain_prefix}.${var.site_base_domain}"
   type    = "A"
 
   alias {
@@ -56,7 +56,7 @@ resource "aws_route53_record" "base_site_hosting_AAAA_record" {
 
 resource "aws_route53_record" "www_site_hosting_AAAA_record" {
   zone_id = aws_route53_zone.crc_resume_zone.zone_id
-  name    = "${var.site_domain_prefix}.${var.site_base_domain}"
+  name    = "www.${var.site_domain_prefix}.${var.site_base_domain}"
   type    = "AAAA"
 
   alias {
