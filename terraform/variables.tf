@@ -31,7 +31,7 @@ variable "site_base_domain" {
   type        = string
 }
 
-variable "site_root_domain_credentials" {
+variable "site_root_domain_aws_profile" {
   description = "The aws CLI profile to use for the root domain account for R53 validation records"
   type        = string
 }

@@ -9,7 +9,7 @@ data "aws_caller_identity" "current" {
 provider "aws" {
   alias = "root_domain_acct"
   region = var.aws_region
-  profile = var.site_root_domain_credentials
+  profile = var.site_root_domain_aws_profile
 }
 
 provider "random" {
