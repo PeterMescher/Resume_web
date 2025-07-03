@@ -11,7 +11,10 @@ Resume_web.code-workspace
 
 #terraform
 Terraform_planning_doc.txt
-dev.tfvars
+*.tfvars
+*.tfbackend
+*.tfstate
+*.tfstate.*
 terraform.tfstate
 terraform.tfstate.backup
 .terraform/

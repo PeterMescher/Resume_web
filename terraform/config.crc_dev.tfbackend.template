@@ -1,0 +1,23 @@
+# Variables used in the Terraform backend configuration are separate from the main Terraform variables.
+# This allows the backend configuration to be used in multiple environments without needing to change the
+# main Terraform variables file.
+
+# This bucket is *just* used for the Terraform state file! It is *not* the one that holds the content
+# for the website. That is specified in tfvars!
+
+# The bucket must already exist, and the user in the profile below must have permissions to read/write to it.
+bucket = "your-state-bucket-name-here" 
+
+key    = "terraform/your-state-file.tfstate"
+
+region = "region-for-your-state-bucket"
+
+# The AWS CLI profile is the one Terraform will use to perform all of its operations, so it obviously
+# needs a lot more permissions than just accessing the state bucket!
+
+# NOTE: You still need to declare the variable aws_profile in your main tfvars file, as the TF provider
+# config requires it.  (The profile specified here is only used for the backend configuration.)
+# In practice, I expect this to be the same profile as the one used in the main tfvars file,
+# but it does not have to be.
+
+profile= "AWS-cli-profile-name"

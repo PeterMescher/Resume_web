@@ -1,5 +1,13 @@
 // @ts-check
 
+// This is a basic test scaffold using Playwright.
+
+// This file is the test spec to verify that the website counter API is functioning correctly.
+// It hits the counter API exactly as the website does and verifies that the counter increments by 1
+// Just as expected.
+// For the "page" it is incrementing, we are using 'test-page' as a default value
+// The API code in Lambda will create any counter entires that do not already exist, so any value can be used.
+
 
 const { test, expect } = require('@playwright/test');
 
