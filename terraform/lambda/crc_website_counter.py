@@ -1,6 +1,7 @@
 import boto3
+import os
 
-counter_table_name = 'Resume_Website_Counter'
+counter_table_name = os.environ['DYNAMODB_TABLE_NAME']
 
 ddb_client = boto3.client('dynamodb', region_name='us-east-1')
 

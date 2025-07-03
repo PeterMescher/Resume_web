@@ -23,6 +23,7 @@ data "aws_iam_policy_document" "crc_lambda_dynamodb_policy" {
     ]
     resources = [
       "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.crc_resume_counter_table.name}",
+      "arn:aws:dynamodb:${var.aws_region}:${data.aws_caller_identity.current.account_id}:table/${aws_dynamodb_table.crc_resume_counter_table.name}/*"
     ]
   }
 }

@@ -7,21 +7,3 @@ resource "aws_dynamodb_table" "crc_resume_counter_table" {
     type = "S"
   }
 }
-
-data "aws_iam_policy_document" "crc_lambda_dynamodb_resource_policy" {
-  statement {
-    effect    = "Allow"
-    sid       = "AllowLambdaDynamoDBAccess"
-    actions = [
-      "dynamodb:DeleteItem",
-      "dynamodb:GetItem",
-      "dynamodb:PutItem",
-      "dynamodb:Scan",
-      "dynamodb:UpdateItem",
-    ]
-    resources = [
-      aws_dynamodb_table.crc_resume_counter_table.arn,
-    ]
-  }
-
-}
