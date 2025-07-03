@@ -22,3 +22,6 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform/
 .terraform.lock.hcl
+
+#built Lambda archive
+crc_website_counter.zip
