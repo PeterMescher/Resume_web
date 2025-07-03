@@ -5,6 +5,9 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+.env
+package.json
+package-lock.json
 
 #vscode
 Resume_web.code-workspace
