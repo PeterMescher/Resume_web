@@ -1,0 +1,22 @@
+# The region to deploy the solution in
+aws_region = "us-east-1"
+
+# The root domain for the site
+site_base_domain = "example.com"
+
+# The subdomain for the site (so, this file would create the site at crc.example.com)
+site_domain_prefix = "crc"
+
+# The AWS CLI profile to the account that manages the root domain
+# NOTE: The IAM policy required for this functionality is in the root of this repository, in the file
+# DNS_ns_record_policy.json
+site_root_domain_aws_profile = "domain-root_account"
+
+# The Route53 zone ID for the root domain
+site_root_zone_id = "ABCDEFGHIJKLMN"
+
+# The AWS CLI profile for the account the site will be deployed in
+aws_profile = "my-dev"
+
+# The local path to the content for the site
+local_resume_content_path = "./content"
