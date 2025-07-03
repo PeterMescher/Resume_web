@@ -1,3 +1,7 @@
+# Note: Concurrent executions of this function may cause a technically-incorrect result
+# e.g., visitor #21 may be counted as visitor #22, and vice-versa.
+# This may cause the test fixture to fail if set for concurrency, but it is not a problem in production.
+
 import boto3
 import os
 
@@ -10,7 +14,7 @@ ddb_client = boto3.client('dynamodb', region_name='us-east-1')
 
 # Note: boto3 docs indicate that update_item will create the item with
 # the given partition key (which is the page name) if it does not already exist, so there is no need
-# to test if the table already an entry for this page
+# to test if the table already has an entry for this page
 
 def increment_page_counter(input_page_name):
     response = ddb_client.update_item(
