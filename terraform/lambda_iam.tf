@@ -1,3 +1,6 @@
+# Lambda needs the ability to assume its execution role, and
+# to write logs to CloudWatch and access the DynamoDB table.
+
 data "aws_iam_policy_document" "crc_lambda_cloudwatch_policy" {
   statement {
     actions = [

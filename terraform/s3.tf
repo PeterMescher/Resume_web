@@ -1,5 +1,7 @@
 resource "aws_s3_bucket" "crc_resume_content_bucket" {
   bucket = "${var.s3_bucket_name_prefix}-${random_id.crc_resume_unique_id.hex}"
+# You would never, ever, do this on a production bucket, but for a personal project
+# intended to be torn down quickly, and holding nothing important, this is fine.
   force_destroy = true
 }
 

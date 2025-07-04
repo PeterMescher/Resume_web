@@ -2,6 +2,7 @@ resource "aws_apigatewayv2_api" "crc_website_counter_api" {
   name          = "crc_website_counter_api"
   protocol_type = "HTTP"
   cors_configuration {
+# CORS does not allow partial wildcards... it's either a full domain or a full wildcard.
     allow_origins = ["https://${var.site_domain_prefix}.${var.site_base_domain}",
                      "https://www.${var.site_domain_prefix}.${var.site_base_domain}"]
     allow_methods = ["GET"]
@@ -39,6 +40,8 @@ resource "aws_apigatewayv2_domain_name" "crc_website_counter_domain" {
     endpoint_type   = "REGIONAL"
     security_policy = "TLS_1_2"
   }
+# Apparently, the certificate is considered created even before validation is complete,
+# so we need an explicit dependency on the certificate validation.
   depends_on = [
     aws_acm_certificate_validation.crc_resume_certificate_validation,
   ]

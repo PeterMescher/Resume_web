@@ -16,6 +16,7 @@ resource "aws_acm_certificate_validation" "crc_resume_certificate_validation" {
   validation_record_fqdns = [for record in aws_route53_record.crc_resume_validation_records : record.fqdn]
 }
 
+# This code is straight out of the Terraform documentation for ACM DNS validation.
 resource "aws_route53_record" "crc_resume_validation_records" {
   for_each = {
     for dvo in aws_acm_certificate.crc_resume_certificate.domain_validation_options : dvo.domain_name => {

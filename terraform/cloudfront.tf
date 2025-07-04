@@ -55,6 +55,8 @@ resource "aws_cloudfront_distribution" "crc_resume_cloudfront" {
     ssl_support_method             = "sni-only"
   }
 
+# Just like with API Gateway, the certificate is considered created even before validation is complete,
+# so we need an explicit dependency on the certificate validation.
   depends_on = [ aws_acm_certificate_validation.crc_resume_certificate_validation ]
 }
 
