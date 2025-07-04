@@ -38,9 +38,9 @@ The content consists of:
 
 This is stored in an S3 bucket, accessible only by CloudFront. In keeping with AWS Best Practices, the bucket itself is not directly accessible to users.
 
-The JavaScript file calls on the API Endpoint, which exposes a single method, GET, which gives the API the filename of the page being counted, and receives back the current visitor count (incremented by 1, of course)  If there were to be other pages on the site, each could have its own visitor count with no changes to the code necessary.
+The JavaScript file calls on the API Endpoint, which exposes a single method, GET, which takes the filename of the page being counted, and receives back the current visitor count (incremented by 1, of course.) If there were to be other pages on the site, each could have its own visitor count with no changes to the code necessary. (The Javascript that calls it uses the filename of the calling page.)
 
-The code to implement the counter is a small python script that is run via a Lambda function. The python script reads the appropriate entry from DDB, increments it, and stores the result back in DDB. (If the entry for the page does not already exist, it will be created.)
+The code to implement the counter is a small python script that is run via a Lambda function. The python reads the appropriate entry from DDB, increments it, and stores the result back in DDB. (If the entry for the page does not already exist because this is the first time it has been visited, it will be created.)
 
 DNS for the site is provided by Route53. The account holding the site and infrastructure has a public DNS zone, with entries for crc.example.com, www.crc.example.com, and api.crc.example.com  (Obviously not hosted at example.com... the actual root domain and subdomain are variables in the Terraform)
 
