@@ -36,13 +36,11 @@ The content consists of:
 - The Visitor Counter API Call (JavaScript)
 - A Style Sheet (CSS) (And I agree, it's not very stylish!)
 
-This is stored in an S3 bucket, accessible only by CloudFront. In keeping with AWS Best Practices, the bucket itself is not directly accessible to users.
+This is stored in an S3 bucket, and in keeping with AWS Best Practices, is accessible only by CloudFront.
 
-The JavaScript file calls on the API Endpoint, which exposes a single method, GET, which takes the filename of the page being counted, and receives back the current visitor count (incremented by 1, of course.) If there were to be other pages on the site, each could have its own visitor count with no changes to the code necessary. (The Javascript that calls it uses the filename of the calling page.)
+The JavaScript file calls on the API Endpoint, which exposes a single method, GET. The Python code takes the filename of the page being counted, and receives back the current visitor count (incremented by 1, of course.) If there were other pages on the site, each could have its own visitor count with no changes to the code, or any manual work at all, necessary. (The Javascript that calls it uses the filename of the calling page, and if there is not already a visitor count for the page, one will be automatically created.)
 
-The code to implement the counter is a small python script that is run via a Lambda function. The python reads the appropriate entry from DDB, increments it, and stores the result back in DDB. (If the entry for the page does not already exist because this is the first time it has been visited, it will be created.)
-
-DNS for the site is provided by Route53. The account holding the site and infrastructure has a public DNS zone, with entries for crc.example.com, www.crc.example.com, and api.crc.example.com  (Obviously not hosted at example.com... the actual root domain and subdomain are variables in the Terraform)
+DNS for the site is provided by Route53. The account holding the site and infrastructure has a public DNS zone, with IaC-generated entries for crc.example.com, www.crc.example.com, and api.crc.example.com  (Obviously not hosted at example.com... the actual root domain and subdomain are variables in Terraform)
 
 The site is set up so the root domain can be in another AWS account (so you could, in theory, host as many different copies of this as you like, one per AWS account; I hope to change this in the future so multiple implementations can be put in the same AWS account.) The IaC code will handle creating the NS entries in the root domain's Route53 environment.
 
