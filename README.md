@@ -18,11 +18,11 @@ This is a basic 'portfolio project' that touches on many elements of implementin
 
 Future updates:
 
-- A full CI/CD pipline via GitHub Actions or CodeDeploy
+- Through the UUID, set it up so the same solution could be implemented multiple times in a single AWS account.
+- A full CI/CD pipline to trigger based on pull requests to the repo
 - Yes, I know it needs tags, since those are the core of AWS Resource and Cost management.
 - Locking down the API so it can only be called from my authorized web pages. (vs. just the CORS I'm using now)
 - User authentication, because why not?
-- Through the UUID, set it up so the same solution could be implemented multiple times in a single AWS account.
 
 # Overall Architecture
 
